@@ -55,6 +55,14 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
         updateChoices()
     }
 })
+function no_money_for_you () {
+    no_money_for_you1 = createScript("Mr. Kao", "I do not give you any money, go away", 2)
+    no_money_for_you2 = createScript("pineapple", "ok i will give you a dio", 3)
+    no_money_for_you3 = createScript("pineapple", "4 doller for 2 water and qidoes", 0)
+    blockObject.setAnyProperty(no_money_for_you1, AnyProp.NextPage, no_money_for_you2)
+    blockObject.setAnyProperty(no_money_for_you2, AnyProp.NextPage, no_money_for_you3)
+    return no_money_for_you1
+}
 function createConversation () {
     startScript = createScript("Mr. Kao", "IT'S SO HOT! I NEED SOME WATER!", 1)
     nextPage = createScript("Pineapple", "You didn't pay your water bill! Now feel the thunder!", 1)
@@ -144,6 +152,7 @@ function imAnOldMan () {
     blockObject.setAnyProperty(oldman1, AnyProp.NextPage, oldman2)
     blockObject.setStringArrayProperty(oldman2, StrArrayProp.Choices, ["OK here's $2!", "NO MONEY FOR YOU!!"])
     blockObject.setAnyProperty(oldman2, AnyProp.Choice1, happyEnding())
+    blockObject.setAnyProperty(oldman2, AnyProp.Choice2, no_money_for_you())
     return oldman1
 }
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -159,6 +168,8 @@ function createScript (characterName: string, text: string, portrait: number) {
     blockObject.setNumberProperty(newScript, NumProp.Portrait, portrait)
     return newScript
 }
+/**
+ */
 let newScript: blockObject.BlockObject = null
 let oldman2: blockObject.BlockObject = null
 let oldman1: blockObject.BlockObject = null
@@ -169,6 +180,9 @@ let makingChoice = false
 let currentScript: blockObject.BlockObject = null
 let nextPage: blockObject.BlockObject = null
 let startScript: blockObject.BlockObject = null
+let no_money_for_you3: blockObject.BlockObject = null
+let no_money_for_you2: blockObject.BlockObject = null
+let no_money_for_you1: blockObject.BlockObject = null
 let choiceIndex = 0
 let happy4: blockObject.BlockObject = null
 let happy3: blockObject.BlockObject = null
