@@ -34,10 +34,10 @@ namespace AnyProp {
 // 
 // 3 = happy
 function happyEnding () {
-    happy1 = createScript("Cloud", "That's right! Such a polite young man!", 0)
-    happy2 = createScript("Old Man", "HaHaHa! What a flatterer. Take this flower as a token of my gratitude.", 3)
-    happy3 = createScript("Cloud", "Oh, it's beautiful! Needs some water though.", 4)
-    happy4 = createScript("Old Man", "Alright....", 1)
+    happy1 = createScript("pineapple", "That's right! Such a polite young man!", 0)
+    happy2 = createScript("Mr. Kao", "HaHaHa! What a flatterer. Take this flower as a token of my gratitude.", 3)
+    happy3 = createScript("pineapple", "Oh, it's beautiful! Needs some water though.", 4)
+    happy4 = createScript("Mr. Kao", "Alright....", 1)
     blockObject.setAnyProperty(happy1, AnyProp.NextPage, happy2)
     blockObject.setAnyProperty(happy2, AnyProp.NextPage, happy3)
     blockObject.setAnyProperty(happy3, AnyProp.NextPage, happy4)
@@ -58,6 +58,7 @@ function no_money_for_you () {
     no_money_for_you3 = createScript("pineapple", "4 doller for 2 water and qidoes", 0)
     blockObject.setAnyProperty(no_money_for_you1, AnyProp.NextPage, no_money_for_you2)
     blockObject.setAnyProperty(no_money_for_you2, AnyProp.NextPage, no_money_for_you3)
+    blockObject.setAnyProperty(no_money_for_you3, AnyProp.NextPage, finalChoice())
     return no_money_for_you1
 }
 function createConversation () {
@@ -107,7 +108,7 @@ function finalChoice () {
     blockObject.setAnyProperty(FinalChoice1, AnyProp.NextPage, FinalChoice2)
     blockObject.setStringArrayProperty(FinalChoice2, StrArrayProp.Choices, ["Please!", "Abracadabra!"])
     blockObject.setAnyProperty(FinalChoice2, AnyProp.Choice1, happyEnding())
-    blockObject.setAnyProperty(FinalChoice2, AnyProp.Choice2, 0)
+    blockObject.setAnyProperty(FinalChoice2, AnyProp.Choice2, sadend())
     return FinalChoice1
 }
 function updateChoices () {
@@ -149,6 +150,7 @@ function imsorry () {
     im_sorry_3 = createScript("pineapple", "4 doller for 2 water and qidoes", 0)
     blockObject.setAnyProperty(im_sorry, AnyProp.NextPage, im_sorry_2)
     blockObject.setAnyProperty(im_sorry_2, AnyProp.NextPage, im_sorry_3)
+    blockObject.setAnyProperty(im_sorry_3, AnyProp.NextPage, finalChoice())
     return im_sorry
 }
 function imAnOldMan () {
@@ -173,6 +175,11 @@ function createScript (characterName: string, text: string, portrait: number) {
     blockObject.setNumberProperty(newScript, NumProp.Portrait, portrait)
     return newScript
 }
+function sadend () {
+    sad_end = createScript("pineapple", "Die!!!!", 2)
+    return sad_end
+}
+let sad_end: blockObject.BlockObject = null
 let newScript: blockObject.BlockObject = null
 let oldman2: blockObject.BlockObject = null
 let oldman1: blockObject.BlockObject = null
