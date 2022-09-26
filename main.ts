@@ -43,9 +43,6 @@ function happyEnding () {
     blockObject.setAnyProperty(happy3, AnyProp.NextPage, happy4)
     return happy1
 }
-function imSorry () {
-	
-}
 // microsoft/arcade-block-objects
 // 
 // riknoll/arcade-story
@@ -69,7 +66,7 @@ function createConversation () {
     blockObject.setAnyProperty(startScript, AnyProp.NextPage, nextPage)
     blockObject.setStringArrayProperty(nextPage, StrArrayProp.Choices, ["I'm an old man!", "I'm sorry :("])
     blockObject.setAnyProperty(nextPage, AnyProp.Choice1, imAnOldMan())
-    blockObject.setAnyProperty(nextPage, AnyProp.Choice2, 0)
+    blockObject.setAnyProperty(nextPage, AnyProp.Choice2, imsorry())
     currentScript = startScript
 }
 function printScript (name: string, text: string, portrait: number) {
@@ -146,6 +143,14 @@ function printCurrentScript () {
         }
     })
 }
+function imsorry () {
+    im_sorry = createScript("Mr. Kao", "but I dont have money", 2)
+    im_sorry_2 = createScript("pineapple", "ok i will give you a dio", 3)
+    im_sorry_3 = createScript("pineapple", "4 doller for 2 water and qidoes", 0)
+    blockObject.setAnyProperty(im_sorry, AnyProp.NextPage, im_sorry_2)
+    blockObject.setAnyProperty(im_sorry_2, AnyProp.NextPage, im_sorry_3)
+    return im_sorry
+}
 function imAnOldMan () {
     oldman1 = createScript("Mr. Kao", "I'm just an old man and I spent all my money gambling, please help me!!!", 3)
     oldman2 = createScript("Pineapple", "OK, just give me $2 and I will get you water", 3)
@@ -168,11 +173,12 @@ function createScript (characterName: string, text: string, portrait: number) {
     blockObject.setNumberProperty(newScript, NumProp.Portrait, portrait)
     return newScript
 }
-/**
- */
 let newScript: blockObject.BlockObject = null
 let oldman2: blockObject.BlockObject = null
 let oldman1: blockObject.BlockObject = null
+let im_sorry_3: blockObject.BlockObject = null
+let im_sorry_2: blockObject.BlockObject = null
+let im_sorry: blockObject.BlockObject = null
 let printingStuff = false
 let FinalChoice2: blockObject.BlockObject = null
 let FinalChoice1: blockObject.BlockObject = null
